@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="CheckOff">
+
+<head>
+  <title>Shopping List Check Off</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <style>
+    .emptyMessage {
+      font-weight: bold;
+      color: red;
+      font-size: 1.2em;
+    }
+    
+    li {
+      margin-bottom: 7px;
+      font-size: 1.2em;
+    }
+    
+    li>button {
+      margin-left: 6px;
+    }
+    
+    button>span {
+      color: green;
+    }
+  </style>
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h3 class="h3">Shopping List Check Off</h3>
+
+    <div class="row row-eq-height" >
+
+      <!-- To Buy List -->
+      <div class="col-md-6 jumbotron" style="display: table-cell;" ng-controller="ItemsToBeBoughtController as itemsToBeBought">
+        <div class="container">
+          <h4 class="h4">To Buy:</h4>
+  
+            <table class="table table-inverse">
+              <tr ng-repeat="item in itemsToBeBought.items">
+                <td>Buy {{item.quantity}} {{item.name}}</td>
+                <td><button class="btn btn-default" ng-click="itemsToBeBought.checkItems($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></td>
+              </tr>
+            </table>
+            <!--<ul>-->
+            <!--  <li ng-repeat="item in itemsToBeBought.items">Buy {{item.quantity}} {{item.name}}-->
+            <!--    <span>-->
+            <!--   <button class="btn btn-default" ng-click="itemsToBeBought.checkItems($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>-->
+            <!--    </span>-->
+            <!--  </li>-->
+            <!--</ul>-->
+      
+  
+          <div ng-if="!itemsToBeBought.items.length" class="emptyMessage">Everything is bought!</div>
+        </div>
+      </div>
+
+      <!-- Already Bought List -->
+      <div class="col-md-6 jumbotron" style="display: table-cell;" ng-controller="ItemsBoughtController as itemsBought">
+        <div class="container">
+          <h4 class="h4">Already Bought:</h4>
+          <ul>
+            <li ng-repeat="item in itemsBought.items">Bought {{item.quantity}} {{item.name}}</li>
+          </ul>
+          <div ng-if="!itemsBought.items.length" class="emptyMessage">Nothing Bought</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
